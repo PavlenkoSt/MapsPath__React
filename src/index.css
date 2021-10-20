@@ -5,9 +5,9 @@
 }
 
 .diviner {
-  height: 100%;
+  min-height: 100%;
   width: 1px;
-  background-color: rgb(136, 136, 136);
+  background-color: rgb(177, 177, 177);
 }
 
 .modal {

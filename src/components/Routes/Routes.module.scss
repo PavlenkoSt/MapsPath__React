@@ -1,11 +1,11 @@
 .routes {
-  width: 50%;
+  width: calc(100vw - 450px);
   overflow: hidden;
 }
 
-.input{
-    margin-bottom: 10px;
-    width: 100%;
+.input {
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .list {
