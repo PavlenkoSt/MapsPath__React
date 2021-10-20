@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { getRoutes } from './actions/routes'
+import Header from './components/Header'
+import { Layout } from 'antd'
 
 const App = () => {
-  return <div>1</div>
+  useEffect(() => {
+    getRoutes()
+  }, [])
+
+  return (
+    <Layout>
+      <Header />
+    </Layout>
+  )
 }
 
 export default App
