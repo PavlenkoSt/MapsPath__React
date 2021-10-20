@@ -9,3 +9,12 @@
   width: 1px;
   background-color: rgb(136, 136, 136);
 }
+
+.modal {
+  display: flex;
+  gap: 20px;
+}
+
+.ant-modal-content {
+  width: 100%;
+}

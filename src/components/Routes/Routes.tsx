@@ -7,28 +7,7 @@ import { List } from 'antd'
 const Routes = () => {
   const [searchValue, setSearchValue] = useState('')
 
-  const mock = [
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-    { id: 0, title: 'title', desc: 'desc', distance: '12 km' },
-  ]
+  const mock = [{ id: 0, title: 'title', desc: 'desc', distance: '12 km' }]
 
   const onSearch = () => {
     console.log(searchValue)
