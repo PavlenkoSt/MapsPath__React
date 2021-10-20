@@ -1,0 +1,11 @@
+.content {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.diviner{
+  min-height: calc(100vh - 104px);
+  width: 1px;
+  background-color: rgb(136, 136, 136);
+}
