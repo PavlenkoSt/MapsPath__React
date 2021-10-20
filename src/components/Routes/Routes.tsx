@@ -27,7 +27,7 @@ const Routes = () => {
         renderItem={route => (
           <List.Item key={route.id} className={s.route}>
             <FullscreenOutlined className={s.icon} />
-            <List.Item.Meta title={<a href="https://ant.design">{route.title}</a>} description={route.desc} />
+            <List.Item.Meta title={<div>{route.title}</div>} description={route.desc} />
             <div className={s.distance}>{route.distance}</div>
             <RightOutlined className={s.arr} />
           </List.Item>

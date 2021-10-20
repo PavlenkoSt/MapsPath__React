@@ -1,10 +1,11 @@
 import React from 'react'
 import { useLoadScript, GoogleMap } from '@react-google-maps/api'
+import { getRoutes } from '../actions/routes'
 
 const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY as string,
-    libraries: ['places'],
+    libraries: ['places', 'geometry'],
   })
 
   if (loadError) return <div>Error</div>
@@ -20,13 +21,18 @@ const Map = () => {
     lng: 34.2324,
   }
 
-  const clickMap = (e: any) => console.log(e)
+  const options = {
+    disableDefaultUI: true,
+    zoomControl: true,
+  }
 
+  const clickMap = (e: any) => {
+    getRoutes()
+    console.log(e)
+  }
 
   return (
-    <div>
-      <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} onClick={clickMap} />
-    </div>
+    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} onClick={clickMap} options={options} />
   )
 }
 
