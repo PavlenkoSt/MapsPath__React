@@ -1,11 +1,13 @@
-import React from 'react'
-import { useLoadScript, GoogleMap, DistanceMatrixService } from '@react-google-maps/api'
+import React, { useState } from 'react'
+import { useLoadScript, GoogleMap, DistanceMatrixService, Marker } from '@react-google-maps/api'
 
 const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY as string,
-    libraries: ['places', 'geometry'],
+    libraries: ['places'],
   })
+
+  const [mockMark, serMockMark] = useState([{ lat: 1.296788, lng: 103.778961 }])
 
   if (loadError) return <div>Error</div>
   if (!isLoaded) return <div>loading...</div>
@@ -26,22 +28,37 @@ const Map = () => {
   }
 
   const clickMap = (e: any) => {
-    console.log(e)
+    const newMark = {
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    }
+    serMockMark([...mockMark, newMark])
   }
 
+  const renderMarkers = mockMark.map(mark => <Marker key={mark.lat} position={{ lat: mark.lat, lng: mark.lng }} />)
+
   return (
-    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} onClick={clickMap} options={options}>
-      <DistanceMatrixService
-        options={{
-          destinations: [{ lat: 1.296788, lng: 103.778961 }],
-          origins: [{ lng: 103.780267, lat: 1.291692 }],
-          //@ts-ignore
-          travelMode: 'WALKING',
-        }}
-        callback={response => {
-          console.log(response)
-        }}
-      />
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      zoom={8}
+      center={mockMark[mockMark.length - 1] || center}
+      onClick={clickMap}
+      options={options}
+    >
+      {renderMarkers}
+      {mockMark.length >= 2 && (
+        <DistanceMatrixService
+          options={{
+            destinations: [mockMark[0]],
+            origins: [...mockMark.filter((mark, idx) => idx !== 0)],
+            //@ts-ignore
+            travelMode: 'WALKING',
+          }}
+          callback={response => {
+            console.log(response)
+          }}
+        />
+      )}
     </GoogleMap>
   )
 }
