@@ -88,7 +88,7 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
             travelMode: 'WALKING',
           }}
           callback={response => {
-            const length = response?.rows[response?.rows.length - 1].elements[0].distance.text
+            const length = response?.rows[response?.rows.length - 1].elements[0].distance?.text
             if (length && setLength) {
               setLength(length)
             }

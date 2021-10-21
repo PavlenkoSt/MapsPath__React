@@ -1,5 +1,5 @@
 import Search from 'antd/lib/input/Search'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FullscreenOutlined, RightOutlined } from '@ant-design/icons'
 import s from './Routes.module.scss'
 import { List } from 'antd'
@@ -8,30 +8,32 @@ import RouteType from '../../models/route'
 import useAction from '../../hooks/useAction'
 
 const RoutesList = () => {
-  const [searchValue, setSearchValue] = useState('')
+  const [searcherRoutes, setSearchedRoutes] = useState([])
 
   const { routes, activeRouteId } = useTypedSelector(state => state.routesReducer)
 
   const { setActiveRouteId } = useAction()
 
-  const onSearch = () => {
-    console.log(searchValue)
+  useEffect(() => onSearch(''), [])
+
+  const onSearch = (value: string) => {
+    if (value) {
+      const search = routes.filter(
+        (route: RouteType) => route.title.indexOf(value) >= 0 || route.fullDesc.indexOf(value) >= 0
+      )
+      setSearchedRoutes(search)
+      return
+    }
+    setSearchedRoutes(routes)
   }
 
-  const activateHandler = (id: number) => {
-    setActiveRouteId(id)
-  }
+  const activateHandler = (id: number) => setActiveRouteId(id)
 
   return (
     <div className={s.routes}>
-      <Search
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
-        onSearch={onSearch}
-        className={s.input}
-      />
+      <Search onChange={e => onSearch(e.target.value)} className={s.input} />
       <List
-        dataSource={routes}
+        dataSource={searcherRoutes}
         className={s.list}
         renderItem={(route: RouteType) => (
           <List.Item
