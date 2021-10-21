@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { useLoadScript, GoogleMap, DistanceMatrixService, Marker } from '@react-google-maps/api'
+import MarkerType from '../models/marker'
 
-const Map = () => {
+type MapPropsType = {
+  setMarkers: Dispatch<SetStateAction<MarkerType[]>>
+}
+
+const Map: FC<MapPropsType> = ({setMarkers}) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY as string,
     libraries: ['places'],

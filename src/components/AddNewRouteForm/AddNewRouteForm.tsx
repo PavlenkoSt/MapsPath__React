@@ -1,8 +1,16 @@
-import React, { useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import s from './AddNewRouteForm.module.scss'
+import MarkerType from '../../models/marker'
 
-const AddNewRouteForm = () => {
+type AddNewRouteFormPropsType = {
+  markers: MarkerType[]
+}
+
+const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({markers}) => {
+
+  const [routeForm, setRouteForm] = useState({})
+
   const validateMessages = {
     required: '${label} is required!',
   }
@@ -14,7 +22,7 @@ const AddNewRouteForm = () => {
   const [detectedLength, setDetectedLength] = useState(0)
 
   return (
-    <Form name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} className={s.form}>
+    <Form onFinish={onFinish} validateMessages={validateMessages} className={s.form}>
       <Form.Item name={['title']} label="Title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>

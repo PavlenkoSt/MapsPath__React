@@ -18,3 +18,8 @@
 .ant-modal-content {
   width: 100%;
 }
+
+.ant-modal-body{
+  display: flex;
+  gap: 20px;
+}

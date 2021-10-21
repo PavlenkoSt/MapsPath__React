@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import HeaderContent from './components/Header/HeaderContent'
-import { Layout, Modal } from 'antd'
+import { Layout } from 'antd'
 import Routes from './components/Routes/Routes'
-import AddNewRouteForm from './components/AddNewRouteForm/AddNewRouteForm'
 import Diviner from './components/Diviner'
-import Map from './components/Map'
+import ModalForm from './components/ModalForm/ModalForm'
 
 const { Header, Content } = Layout
 
@@ -19,19 +18,8 @@ const App = () => {
       <Content className="content">
         <Routes />
         <Diviner />
-        <Map />
       </Content>
-      <Modal
-        visible={isModalVisible}
-        footer={null}
-        onCancel={() => setIsModalVisible(false)}
-        className="modal"
-        title="Add new path"
-        width={1000}
-      >
-        <AddNewRouteForm />
-        <Diviner />
-      </Modal>
+      <ModalForm isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
     </Layout>
   )
 }
