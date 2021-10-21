@@ -14,7 +14,7 @@ const Routes = () => {
 
   const { activeRouteId, routes } = useTypedSelector(state => state.routesReducer)
 
-  const { changeFavouriteStatus } = useAction()
+  const { changeFavouriteStatus, removeRoute } = useAction()
 
   useEffect(() => {
     getActiveRoute()
@@ -41,7 +41,7 @@ const Routes = () => {
             <Button type="primary" ghost onClick={favouriteHandler}>
               {activeRoute?.favourite ? 'Remove from favourite' : 'Add to favourites'}
             </Button>
-            <Button type="primary" danger>
+            <Button type="primary" danger onClick={() => removeRoute(activeRoute.id)}>
               Remove
             </Button>
           </div>
