@@ -1,6 +1,5 @@
 import React, { Dispatch, FC, SetStateAction } from 'react'
-import { Button } from 'antd'
-import s from './HeaderContent.module.scss'
+import { Button, Col, Row } from 'antd'
 import { FullscreenOutlined } from '@ant-design/icons'
 
 type HeaderContentPropsType = {
@@ -9,15 +8,23 @@ type HeaderContentPropsType = {
 
 const HeaderContent: FC<HeaderContentPropsType> = ({ setIsModalVisible }) => {
   return (
-    <div className={s.content}>
-      <div className={s.logo}>
-        <FullscreenOutlined />
-        <span>Saunter</span>
-      </div>
-      <Button type="primary" onClick={() => setIsModalVisible(true)}>
-        Add path
-      </Button>
-    </div>
+    <Row justify="space-between" align="middle">
+      <Col span={12}>
+        <Row style={{ color: '#fff', gap: 10, fontSize: 20 }}>
+          <Col>
+            <FullscreenOutlined />
+          </Col>
+          <Col>Saunter</Col>
+        </Row>
+      </Col>
+      <Col span={12}>
+        <Row justify="end">
+          <Button type="primary" onClick={() => setIsModalVisible(true)}>
+            Add path
+          </Button>
+        </Row>
+      </Col>
+    </Row>
   )
 }
 

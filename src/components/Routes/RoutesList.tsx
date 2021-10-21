@@ -2,7 +2,7 @@ import Search from 'antd/lib/input/Search'
 import React, { useEffect, useState } from 'react'
 import { FullscreenOutlined, RightOutlined, StarOutlined } from '@ant-design/icons'
 import s from './Routes.module.scss'
-import { List } from 'antd'
+import { Col, List } from 'antd'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import RouteType from '../../models/route'
 import useAction from '../../hooks/useAction'
@@ -31,7 +31,7 @@ const RoutesList = () => {
   const activateHandler = (id: number) => setActiveRouteId(id)
 
   return (
-    <div className={s.routes}>
+    <Col className={s.routes}>
       <Search onChange={e => searchedFilter(e.target.value)} className={s.input} />
       <List
         dataSource={searchedRoutes}
@@ -45,18 +45,18 @@ const RoutesList = () => {
             <FullscreenOutlined className={s.icon} />
             <List.Item.Meta
               title={
-                <div>
+                <Col>
                   {route.favourite && <StarOutlined />} {route.title}
-                </div>
+                </Col>
               }
               description={route.shortDesc}
             />
-            <div className={s.distance}>{formatLength(route.length)}</div>
-            <RightOutlined className={s.arr} />
+            <Col className={s.distance}>{formatLength(route.length)}</Col>
+            <RightOutlined style={{ color: '#333' }} />
           </List.Item>
         )}
       />
-    </div>
+    </Col>
   )
 }
 

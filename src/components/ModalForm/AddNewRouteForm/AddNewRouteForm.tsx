@@ -1,6 +1,5 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react'
-import { Form, Input, Button } from 'antd'
-import s from './AddNewRouteForm.module.scss'
+import { Form, Input, Button, Row, Col } from 'antd'
 import MarkerType from '../../../models/marker'
 import { toast, ToastOptions } from 'react-toastify'
 import useAction from '../../../hooks/useAction'
@@ -42,6 +41,11 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
     required: '${label} is required!',
   }
 
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  }
+
   const toastOptions = { hideProgressBar: true, position: 'top-center' } as ToastOptions<{}>
 
   const onFinish = (values: FormDataType) => {
@@ -69,23 +73,25 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
   const [detectedLength, setDetectedLength] = useState(0)
 
   return (
-    <Form form={form} onFinish={onFinish} validateMessages={validateMessages} className={s.form}>
+    <Form {...layout} form={form} onFinish={onFinish} validateMessages={validateMessages} style={{ width: '50%' }}>
       <Form.Item name={['title']} label="Title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['shortDescription']} label="Short description" rules={[{ required: true, max: 160 }]}>
         <Input.TextArea onChange={e => setDetectedLength(e.target.value.length)} />
       </Form.Item>
-      <Form.Item className={s.limit}>
-        <span>Limit {detectedLength} of 160</span>
+      <Form.Item>
+        <Row justify="end">
+          <Col>Limit {detectedLength} of 160</Col>
+        </Row>
       </Form.Item>
       <Form.Item name={['fullDescription']} label="Full description" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item className={s.length}>
-        <div>Length: {formatLength(length) || '0 m'}</div>
-      </Form.Item>
       <Form.Item>
+        <Row justify="end">Length: {formatLength(length) || '0 m'}</Row>
+      </Form.Item>
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
           Add path
         </Button>

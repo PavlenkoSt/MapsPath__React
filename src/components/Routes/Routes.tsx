@@ -5,8 +5,7 @@ import RouteType from '../../models/route'
 import Diviner from '../Diviner'
 import Map from '../Map'
 import RoutesList from './RoutesList'
-import { Button, Card } from 'antd'
-import s from './Routes.module.scss'
+import { Button, Card, Row } from 'antd'
 import useAction from '../../hooks/useAction'
 import formatLength from '../../utilts/formatLength'
 
@@ -40,16 +39,16 @@ const Routes = () => {
           extra={<span>{formatLength(activeRoute?.length)}</span>}
           style={{ width: 460 }}
         >
-          <p>{activeRoute?.fullDesc}</p>
+          <Row style={{ marginBottom: 20 }}>{activeRoute?.fullDesc}</Row>
           <Map markers={activeRoute?.markers} isAddRoute={false} />
-          <div className={s.btns}>
+          <Row justify="space-between" style={{ marginTop: 20 }}>
             <Button type="primary" ghost onClick={favouriteHandler}>
               {activeRoute?.favourite ? 'Remove from favourite' : 'Add to favourites'}
             </Button>
             <Button type="primary" danger onClick={() => removeRoute(activeRoute.id)}>
               Remove
             </Button>
-          </div>
+          </Row>
         </Card>
       )}
     </Content>
