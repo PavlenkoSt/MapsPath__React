@@ -9,7 +9,7 @@ const initialState: RoutesStateType = {
       shortDesc: 'test 1 test 1',
       fullDesc: 'test 1test 1test 1',
       favourite: false,
-      length: '80,2 км',
+      length: 766662,
       markers: [
         {
           lat: 49.907923534382,
@@ -29,7 +29,7 @@ const initialState: RoutesStateType = {
       shortDesc: 'test 2 test 2',
       fullDesc: 'test 2test 2test 2',
       favourite: false,
-      length: '80,2 км',
+      length: 76666,
       markers: [
         {
           lat: 43.9023353597782,
@@ -49,7 +49,7 @@ const initialState: RoutesStateType = {
       shortDesc: 'desc',
       fullDesc: 'description',
       favourite: false,
-      length: '80,2 км',
+      length: 766663,
       markers: [
         {
           lat: 29.907923582,

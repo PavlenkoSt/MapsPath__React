@@ -12,7 +12,7 @@ type ModalFormPropsType = {
 
 const ModalForm: FC<ModalFormPropsType> = ({ isModalVisible, setIsModalVisible }) => {
   const [markers, setMarkers] = useState([] as MarkerType[])
-  const [length, setLength] = useState('')
+  const [length, setLength] = useState(0)
 
   return (
     <Modal

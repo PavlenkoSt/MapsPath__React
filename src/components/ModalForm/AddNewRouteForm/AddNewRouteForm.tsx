@@ -7,10 +7,10 @@ import useAction from '../../../hooks/useAction'
 
 type AddNewRouteFormPropsType = {
   markers: MarkerType[]
-  length: string
+  length: number
   setIsModalVisible: Dispatch<SetStateAction<boolean>>
   setMarkers: Dispatch<SetStateAction<MarkerType[]>>
-  setLength: Dispatch<SetStateAction<string>>
+  setLength: Dispatch<SetStateAction<number>>
 }
 
 type FormDataType = {
@@ -52,7 +52,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
 
       form.resetFields()
       setMarkers([])
-      setLength('0 m')
+      setLength(0)
 
       toast('Success! Route added to list', toastOptions)
       return

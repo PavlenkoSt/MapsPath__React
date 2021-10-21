@@ -5,7 +5,7 @@ import { LoadingOutlined } from '@ant-design/icons'
 
 type MapPropsType = {
   setMarkers?: Dispatch<SetStateAction<MarkerType[]>>
-  setLength?: Dispatch<SetStateAction<string>>
+  setLength?: Dispatch<SetStateAction<number>>
   markers: MarkerType[]
   isAddRoute: boolean
 }
@@ -97,9 +97,12 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
             travelMode: 'WALKING',
           }}
           callback={response => {
-            const length = response?.rows[response?.rows.length - 1].elements[0].distance?.text
-            if (length && setLength) {
-              setLength(length)
+            const meters = response?.rows.reduce((acc, cur) => {
+              return (acc += cur?.elements[0].distance.value)
+            }, 0)
+
+            if (meters && setLength) {
+              setLength(meters)
             }
           }}
         />

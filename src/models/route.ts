@@ -6,7 +6,7 @@ type RouteType = {
   shortDesc: string
   fullDesc: string
   markers: MarkerType[]
-  length: string
+  length: number
   favourite: boolean
 }
 
