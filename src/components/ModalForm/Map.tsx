@@ -38,12 +38,31 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength }) => {
     const newMark = {
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),
+      id: Date.now(),
     }
     setMarkers([...markers, newMark])
   }
 
+  const changeMarkerPosition = (latLng: any, id: number) => {
+    setMarkers(
+      markers.map(mark => {
+        if (mark.id === id) {
+          mark.lat = latLng.lat()
+          mark.lng = latLng.lng()
+          console.log(mark)
+        }
+        return mark
+      })
+    )
+  }
+
   const renderMarkers = markers.map(mark => (
-    <Marker draggable={true} key={mark.lat} position={{ lat: mark.lat, lng: mark.lng }} />
+    <Marker
+      onDragEnd={e => changeMarkerPosition(e.latLng, mark.id)}
+      draggable={true}
+      key={mark.id}
+      position={{ lat: mark.lat, lng: mark.lng }}
+    />
   ))
 
   return (
