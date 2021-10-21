@@ -2,7 +2,6 @@ import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import s from './AddNewRouteForm.module.scss'
 import MarkerType from '../../../models/marker'
-import RouteType from '../../../models/route'
 import { toast } from 'react-toastify'
 import useAction from '../../../hooks/useAction'
 
@@ -10,6 +9,7 @@ type AddNewRouteFormPropsType = {
   markers: MarkerType[]
   length: string
   setIsModalVisible: Dispatch<SetStateAction<boolean>>
+  setMarkers: Dispatch<SetStateAction<MarkerType[]>>
 }
 
 type FormDataType = {
@@ -18,8 +18,10 @@ type FormDataType = {
   fullDescription: string
 }
 
-const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsModalVisible }) => {
+const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsModalVisible, setMarkers }) => {
   const { addRoute } = useAction()
+
+  const [form] = Form.useForm()
 
   const validateMessages = {
     required: '${label} is required!',
@@ -38,7 +40,12 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsM
         length,
         markers,
       })
+
+      form.resetFields()
+      setMarkers([])
+
       setIsModalVisible(false)
+
       toast('Success! Route added to list', toastOptions)
       return
     }
@@ -48,7 +55,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsM
   const [detectedLength, setDetectedLength] = useState(0)
 
   return (
-    <Form onFinish={onFinish} validateMessages={validateMessages} className={s.form}>
+    <Form form={form} onFinish={onFinish} validateMessages={validateMessages} className={s.form}>
       <Form.Item name={['title']} label="Title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>

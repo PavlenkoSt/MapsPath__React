@@ -8,10 +8,12 @@ type MapPropsType = {
   markers: MarkerType[]
 }
 
+const libraries = ['places'] as Array<'places' | 'drawing' | 'geometry' | 'localContext' | 'visualization'>
+
 const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength }) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY as string,
-    libraries: ['places'],
+    libraries,
   })
 
   if (loadError) return <div>Error</div>
@@ -23,8 +25,8 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength }) => {
   }
 
   const center = {
-    lat: 42.3232,
-    lng: 34.2324,
+    lat: 49.4444,
+    lng: 32.0598,
   }
 
   const options = {

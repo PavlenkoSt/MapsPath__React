@@ -23,7 +23,12 @@ const ModalForm: FC<ModalFormPropsType> = ({ isModalVisible, setIsModalVisible }
       title="Add new path"
       width={1000}
     >
-      <AddNewRouteForm markers={markers} length={length} setIsModalVisible={setIsModalVisible} />
+      <AddNewRouteForm
+        markers={markers}
+        length={length}
+        setIsModalVisible={setIsModalVisible}
+        setMarkers={setMarkers}
+      />
       <Diviner />
       <Map setMarkers={setMarkers} markers={markers} setLength={setLength} />
     </Modal>
