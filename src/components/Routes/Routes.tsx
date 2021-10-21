@@ -5,14 +5,21 @@ import s from './Routes.module.scss'
 import { List } from 'antd'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import RouteType from '../../models/route'
+import useAction from '../../hooks/useAction'
 
 const Routes = () => {
   const [searchValue, setSearchValue] = useState('')
 
-  const { routes } = useTypedSelector(state => state.routesReducer)
+  const { routes, activeRouteId } = useTypedSelector(state => state.routesReducer)
+
+  const { setActiveRouteId } = useAction()
 
   const onSearch = () => {
     console.log(searchValue)
+  }
+
+  const activateHandler = (id: number) => {
+    setActiveRouteId(id)
   }
 
   return (
@@ -27,7 +34,11 @@ const Routes = () => {
         dataSource={routes}
         className={s.list}
         renderItem={(route: RouteType) => (
-          <List.Item key={route.id} className={s.route}>
+          <List.Item
+            key={route.id}
+            className={activeRouteId === route.id ? `${s.route} ${s.active}` : s.route}
+            onClick={() => activateHandler(route.id)}
+          >
             <FullscreenOutlined className={s.icon} />
             <List.Item.Meta title={<div>{route.title}</div>} description={route.shortDesc} />
             <div className={s.distance}>{route.length}</div>

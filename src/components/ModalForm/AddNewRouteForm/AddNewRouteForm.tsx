@@ -81,7 +81,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Add path
         </Button>
       </Form.Item>
     </Form>

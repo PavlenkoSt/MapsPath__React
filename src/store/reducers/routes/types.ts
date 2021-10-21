@@ -2,11 +2,12 @@ import RouteType from '../../../models/route'
 
 export type RoutesStateType = {
   routes: RouteType[]
-  activeRoute: RouteType
+  activeRouteId: number | null
 }
 
 export enum RoutesActionTypes {
   ADD_ROUTE = 'ADD_ROUTE',
+  SET_ACTIVE_ROUTE_ID = 'SET_ACTIVE_ROUTE_ID',
 }
 
 type AddRouteType = {
@@ -14,4 +15,9 @@ type AddRouteType = {
   payload: RouteType
 }
 
-export type WeatherActionCreatorsType = AddRouteType
+type SetActiveRouteId = {
+  type: RoutesActionTypes.SET_ACTIVE_ROUTE_ID
+  payload: number
+}
+
+export type WeatherActionCreatorsType = AddRouteType | SetActiveRouteId
