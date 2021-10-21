@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, SetStateAction } from 'react'
-import { useLoadScript, GoogleMap, DistanceMatrixService, Marker } from '@react-google-maps/api'
+import { useLoadScript, GoogleMap, DistanceMatrixService, Marker, Polyline } from '@react-google-maps/api'
 import MarkerType from '../models/marker'
 import { LoadingOutlined } from '@ant-design/icons'
 
@@ -19,12 +19,7 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
   })
 
   if (loadError) return <div>Error</div>
-  if (!isLoaded)
-    return (
-      <div>
-        <LoadingOutlined />
-      </div>
-    )
+  if (!isLoaded) return <LoadingOutlined />
 
   const mapContainerStyle = {
     width: '400px',
@@ -85,6 +80,14 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
       options={options}
     >
       {renderMarkers}
+      <Polyline
+        path={markers}
+        options={{
+          strokeColor: '#ff2527',
+          strokeOpacity: 0.75,
+          strokeWeight: 2,
+        }}
+      />
       {markers.length >= 2 && (
         <DistanceMatrixService
           options={{
