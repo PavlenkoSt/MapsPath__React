@@ -1,9 +1,10 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import s from './AddNewRouteForm.module.scss'
 import MarkerType from '../../../models/marker'
 import RouteType from '../../../models/route'
 import { toast } from 'react-toastify'
+import useAction from '../../../hooks/useAction'
 
 type AddNewRouteFormPropsType = {
   markers: MarkerType[]
@@ -18,7 +19,7 @@ type FormDataType = {
 }
 
 const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsModalVisible }) => {
-  const [routeForm, setRouteForm] = useState({} as RouteType)
+  const { addRoute } = useAction()
 
   const validateMessages = {
     required: '${label} is required!',
@@ -28,7 +29,8 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsM
 
   const onFinish = (values: FormDataType) => {
     if (markers.length >= 2) {
-      setRouteForm({
+      addRoute({
+        id: Date.now(),
         title: values.title,
         shortDesc: values.shortDescription,
         fullDesc: values.fullDescription,
@@ -42,10 +44,6 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsM
     }
     toast('Error! You need to put 2 or more markers on map', toastOptions)
   }
-
-  useEffect(() => {
-    console.log(routeForm)
-  }, [routeForm])
 
   const [detectedLength, setDetectedLength] = useState(0)
 

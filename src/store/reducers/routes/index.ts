@@ -2,7 +2,7 @@ import RouteType from '../../../models/route'
 import { RoutesActionTypes, RoutesStateType, WeatherActionCreatorsType } from './types'
 
 const initialState: RoutesStateType = {
-  routes: [],
+  routes: [] as RouteType[],
   activeRoute: null as unknown as RouteType,
 }
 

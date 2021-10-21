@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import { FullscreenOutlined, RightOutlined } from '@ant-design/icons'
 import s from './Routes.module.scss'
 import { List } from 'antd'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import RouteType from '../../models/route'
 
 const Routes = () => {
   const [searchValue, setSearchValue] = useState('')
 
-  const mock = [{ id: 0, title: 'title', desc: 'desc', distance: '12 km' }]
+  const { routes } = useTypedSelector(state => state.routesReducer)
 
   const onSearch = () => {
     console.log(searchValue)
@@ -22,13 +24,13 @@ const Routes = () => {
         className={s.input}
       />
       <List
-        dataSource={mock}
+        dataSource={routes}
         className={s.list}
-        renderItem={route => (
+        renderItem={(route: RouteType) => (
           <List.Item key={route.id} className={s.route}>
             <FullscreenOutlined className={s.icon} />
-            <List.Item.Meta title={<div>{route.title}</div>} description={route.desc} />
-            <div className={s.distance}>{route.distance}</div>
+            <List.Item.Meta title={<div>{route.title}</div>} description={route.shortDesc} />
+            <div className={s.distance}>{route.length}</div>
             <RightOutlined className={s.arr} />
           </List.Item>
         )}
