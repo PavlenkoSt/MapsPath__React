@@ -69,6 +69,8 @@ const initialState: RoutesStateType = {
 
 const routesReducer = (state = initialState, action: WeatherActionCreatorsType) => {
   switch (action.type) {
+    case RoutesActionTypes.SET_ROUTES:
+      return { ...state, routes: action.payload }
     case RoutesActionTypes.ADD_ROUTE:
       return { ...state, routes: [...state.routes, action.payload] }
     case RoutesActionTypes.SET_ACTIVE_ROUTE_ID:

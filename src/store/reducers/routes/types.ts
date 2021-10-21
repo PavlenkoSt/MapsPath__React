@@ -6,6 +6,7 @@ export type RoutesStateType = {
 }
 
 export enum RoutesActionTypes {
+  SET_ROUTES = 'SET_ROUTES',
   ADD_ROUTE = 'ADD_ROUTE',
   REMOVE_ROUTE = 'REMOVE_ROUTE',
   SET_ACTIVE_ROUTE_ID = 'SET_ACTIVE_ROUTE_ID',
@@ -32,4 +33,9 @@ type RemoveRoute = {
   payload: number
 }
 
-export type WeatherActionCreatorsType = AddRouteType | SetActiveRouteId | ChangeFavouriteStatus | RemoveRoute
+type SetRoutes = {
+  type: RoutesActionTypes.SET_ROUTES
+  payload: RouteType[]
+}
+
+export type WeatherActionCreatorsType = AddRouteType | SetActiveRouteId | ChangeFavouriteStatus | RemoveRoute | SetRoutes

@@ -2,6 +2,7 @@ import RouteType from '../../../models/route'
 import { RoutesActionTypes } from './types'
 
 const routesActionCreators = {
+  setRoutes: (payload: RouteType[]) => ({ type: RoutesActionTypes.SET_ROUTES, payload } as const),
   addRoute: (payload: RouteType) => ({ type: RoutesActionTypes.ADD_ROUTE, payload } as const),
   setActiveRouteId: (payload: number) => ({ type: RoutesActionTypes.SET_ACTIVE_ROUTE_ID, payload } as const),
   removeRoute: (payload: number) => ({ type: RoutesActionTypes.REMOVE_ROUTE, payload } as const),
