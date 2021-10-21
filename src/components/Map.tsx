@@ -98,7 +98,7 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
           }}
           callback={response => {
             const meters = response?.rows.reduce((acc, cur) => {
-              return (acc += cur?.elements[0].distance.value)
+              return (acc += cur?.elements[0]?.distance?.value)
             }, 0)
 
             if (meters && setLength) {

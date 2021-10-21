@@ -4,6 +4,7 @@ import s from './AddNewRouteForm.module.scss'
 import MarkerType from '../../../models/marker'
 import { toast, ToastOptions } from 'react-toastify'
 import useAction from '../../../hooks/useAction'
+import formatLength from '../../../utilts/formatLength'
 
 type AddNewRouteFormPropsType = {
   markers: MarkerType[]
@@ -57,7 +58,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
       toast('Success! Route added to list', toastOptions)
       return
     }
-    toast('Error! You need to put 2 or more markers on map', toastOptions)
+    toast('Error! You should put 2 or more markers on map', toastOptions)
   }
 
   const [detectedLength, setDetectedLength] = useState(0)
@@ -77,7 +78,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
         <Input.TextArea />
       </Form.Item>
       <Form.Item className={s.length}>
-        <div>Length: {length || '0 m'}</div>
+        <div>Length: {formatLength(length) || '0 m'}</div>
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">

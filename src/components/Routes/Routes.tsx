@@ -8,6 +8,7 @@ import RoutesList from './RoutesList'
 import { Button, Card } from 'antd'
 import s from './Routes.module.scss'
 import useAction from '../../hooks/useAction'
+import formatLength from '../../utilts/formatLength'
 
 const Routes = () => {
   const [activeRoute, setActiveRoute] = useState(null as unknown as RouteType)
@@ -34,7 +35,11 @@ const Routes = () => {
       <RoutesList />
       <Diviner />
       {activeRouteId && (
-        <Card title={activeRoute?.title} extra={<span>{activeRoute?.length}</span>} style={{ width: 460 }}>
+        <Card
+          title={activeRoute?.title}
+          extra={<span>{formatLength(activeRoute?.length)}</span>}
+          style={{ width: 460 }}
+        >
           <p>{activeRoute?.fullDesc}</p>
           <Map markers={activeRoute?.markers} isAddRoute={false} />
           <div className={s.btns}>

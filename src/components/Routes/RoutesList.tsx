@@ -6,6 +6,7 @@ import { List } from 'antd'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import RouteType from '../../models/route'
 import useAction from '../../hooks/useAction'
+import formatLength from '../../utilts/formatLength'
 
 const RoutesList = () => {
   const [searchedRoutes, setSearchedRoutes] = useState([] as RouteType[])
@@ -50,7 +51,7 @@ const RoutesList = () => {
               }
               description={route.shortDesc}
             />
-            <div className={s.distance}>{route.length}</div>
+            <div className={s.distance}>{formatLength(route.length)}</div>
             <RightOutlined className={s.arr} />
           </List.Item>
         )}
