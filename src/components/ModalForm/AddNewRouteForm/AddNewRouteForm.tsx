@@ -10,6 +10,7 @@ type AddNewRouteFormPropsType = {
   length: string
   setIsModalVisible: Dispatch<SetStateAction<boolean>>
   setMarkers: Dispatch<SetStateAction<MarkerType[]>>
+  setLength: Dispatch<SetStateAction<string>>
 }
 
 type FormDataType = {
@@ -18,7 +19,13 @@ type FormDataType = {
   fullDescription: string
 }
 
-const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsModalVisible, setMarkers }) => {
+const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
+  markers,
+  length,
+  setIsModalVisible,
+  setMarkers,
+  setLength,
+}) => {
   const { addRoute } = useAction()
 
   const [form] = Form.useForm()
@@ -41,10 +48,11 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({ markers, length, setIsM
         markers,
       })
 
+      setIsModalVisible(false)
+
       form.resetFields()
       setMarkers([])
-
-      setIsModalVisible(false)
+      setLength('0 m')
 
       toast('Success! Route added to list', toastOptions)
       return

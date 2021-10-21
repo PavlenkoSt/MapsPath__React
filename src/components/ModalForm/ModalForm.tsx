@@ -28,6 +28,7 @@ const ModalForm: FC<ModalFormPropsType> = ({ isModalVisible, setIsModalVisible }
         length={length}
         setIsModalVisible={setIsModalVisible}
         setMarkers={setMarkers}
+        setLength={setLength}
       />
       <Diviner />
       <Map setMarkers={setMarkers} markers={markers} setLength={setLength} />
