@@ -3,14 +3,15 @@ import { useLoadScript, GoogleMap, DistanceMatrixService, Marker } from '@react-
 import MarkerType from '../../models/marker'
 
 type MapPropsType = {
-  setMarkers: Dispatch<SetStateAction<MarkerType[]>>
-  setLength: Dispatch<SetStateAction<string>>
+  setMarkers?: Dispatch<SetStateAction<MarkerType[]>>
+  setLength?: Dispatch<SetStateAction<string>>
   markers: MarkerType[]
+  isAddRoute: boolean
 }
 
 const libraries = ['places'] as Array<'places' | 'drawing' | 'geometry' | 'localContext' | 'visualization'>
 
-const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength }) => {
+const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY as string,
     libraries,
@@ -35,25 +36,29 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength }) => {
   }
 
   const clickMap = (e: any) => {
-    const newMark = {
-      lat: e.latLng.lat(),
-      lng: e.latLng.lng(),
-      id: Date.now(),
+    if (isAddRoute && setMarkers) {
+      const newMark = {
+        lat: e.latLng.lat(),
+        lng: e.latLng.lng(),
+        id: Date.now(),
+      }
+      setMarkers([...markers, newMark])
     }
-    setMarkers([...markers, newMark])
   }
 
   const changeMarkerPosition = (latLng: any, id: number) => {
-    setMarkers(
-      markers.map(mark => {
-        if (mark.id === id) {
-          mark.lat = latLng.lat()
-          mark.lng = latLng.lng()
-          console.log(mark)
-        }
-        return mark
-      })
-    )
+    if (isAddRoute && setMarkers) {
+      setMarkers(
+        markers.map(mark => {
+          if (mark.id === id) {
+            mark.lat = latLng.lat()
+            mark.lng = latLng.lng()
+            console.log(mark)
+          }
+          return mark
+        })
+      )
+    }
   }
 
   const renderMarkers = markers.map(mark => (
@@ -84,7 +89,7 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength }) => {
           }}
           callback={response => {
             const length = response?.rows[response?.rows.length - 1].elements[0].distance.text
-            if (length) {
+            if (length && setLength) {
               setLength(length)
             }
           }}

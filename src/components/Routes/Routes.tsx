@@ -1,52 +1,33 @@
-import Search from 'antd/lib/input/Search'
-import React, { useState } from 'react'
-import { FullscreenOutlined, RightOutlined } from '@ant-design/icons'
-import s from './Routes.module.scss'
-import { List } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Content } from 'antd/lib/layout/layout'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import RouteType from '../../models/route'
-import useAction from '../../hooks/useAction'
+import Diviner from '../Diviner'
+import Map from '../ModalForm/Map'
+import RoutesList from './RoutesList'
 
 const Routes = () => {
-  const [searchValue, setSearchValue] = useState('')
+  const [activeRoute, setActiveRoute] = useState(null as unknown as RouteType)
 
-  const { routes, activeRouteId } = useTypedSelector(state => state.routesReducer)
+  const { activeRouteId, routes } = useTypedSelector(state => state.routesReducer)
 
-  const { setActiveRouteId } = useAction()
+  useEffect(() => {
+    getActiveRoute()
+  }, [activeRouteId])
 
-  const onSearch = () => {
-    console.log(searchValue)
-  }
-
-  const activateHandler = (id: number) => {
-    setActiveRouteId(id)
+  const getActiveRoute = () => {
+    const searchedRoute = routes.find((route: RouteType) => route.id === activeRouteId)
+    if (searchedRoute) {
+      setActiveRoute(searchedRoute)
+    }
   }
 
   return (
-    <div className={s.routes}>
-      <Search
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
-        onSearch={onSearch}
-        className={s.input}
-      />
-      <List
-        dataSource={routes}
-        className={s.list}
-        renderItem={(route: RouteType) => (
-          <List.Item
-            key={route.id}
-            className={activeRouteId === route.id ? `${s.route} ${s.active}` : s.route}
-            onClick={() => activateHandler(route.id)}
-          >
-            <FullscreenOutlined className={s.icon} />
-            <List.Item.Meta title={<div>{route.title}</div>} description={route.shortDesc} />
-            <div className={s.distance}>{route.length}</div>
-            <RightOutlined className={s.arr} />
-          </List.Item>
-        )}
-      />
-    </div>
+    <Content className="content">
+      <RoutesList />
+      <Diviner />
+      {activeRouteId && <Map markers={activeRoute?.markers} isAddRoute={false} />}
+    </Content>
   )
 }
 

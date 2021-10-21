@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import HeaderContent from './components/Header/HeaderContent'
 import { Layout } from 'antd'
-import Routes from './components/Routes/Routes'
-import Diviner from './components/Diviner'
 import ModalForm from './components/ModalForm/ModalForm'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Routes from './components/Routes/Routes'
 
-const { Header, Content } = Layout
+const { Header } = Layout
 
 const App = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -17,10 +16,7 @@ const App = () => {
       <Header>
         <HeaderContent setIsModalVisible={setIsModalVisible} />
       </Header>
-      <Content className="content">
-        <Routes />
-        <Diviner />
-      </Content>
+      <Routes />
       <ModalForm isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
       <ToastContainer />
     </Layout>
