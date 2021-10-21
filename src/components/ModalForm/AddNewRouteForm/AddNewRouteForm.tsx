@@ -31,6 +31,13 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
 
   const [form] = Form.useForm()
 
+  const reset = () => {
+    form.resetFields()
+    setMarkers([])
+    setLength(0)
+    setDetectedLength(0)
+  }
+
   const validateMessages = {
     required: '${label} is required!',
   }
@@ -49,11 +56,9 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
         markers,
       })
 
-      setIsModalVisible(false)
+      reset()
 
-      form.resetFields()
-      setMarkers([])
-      setLength(0)
+      setIsModalVisible(false)
 
       toast('Success! Route added to list', toastOptions)
       return
