@@ -8,6 +8,7 @@ export type RoutesStateType = {
 export enum RoutesActionTypes {
   ADD_ROUTE = 'ADD_ROUTE',
   SET_ACTIVE_ROUTE_ID = 'SET_ACTIVE_ROUTE_ID',
+  CHANGE_FAVOURITE_STATUS = 'CHANGE_FAVOURITE_STATUS',
 }
 
 type AddRouteType = {
@@ -20,4 +21,9 @@ type SetActiveRouteId = {
   payload: number
 }
 
-export type WeatherActionCreatorsType = AddRouteType | SetActiveRouteId
+type ChangeFavouriteStatus = {
+  type: RoutesActionTypes.CHANGE_FAVOURITE_STATUS
+  payload: { id: number; status: boolean }
+}
+
+export type WeatherActionCreatorsType = AddRouteType | SetActiveRouteId | ChangeFavouriteStatus
