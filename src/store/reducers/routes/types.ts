@@ -38,4 +38,9 @@ type SetRoutes = {
   payload: RouteType[]
 }
 
-export type WeatherActionCreatorsType = AddRouteType | SetActiveRouteId | ChangeFavouriteStatus | RemoveRoute | SetRoutes
+export type WeatherActionCreatorsType =
+  | AddRouteType
+  | SetActiveRouteId
+  | ChangeFavouriteStatus
+  | RemoveRoute
+  | SetRoutes
