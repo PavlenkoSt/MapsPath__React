@@ -2,7 +2,7 @@ import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import s from './AddNewRouteForm.module.scss'
 import MarkerType from '../../../models/marker'
-import { toast } from 'react-toastify'
+import { toast, ToastOptions } from 'react-toastify'
 import useAction from '../../../hooks/useAction'
 
 type AddNewRouteFormPropsType = {
@@ -34,7 +34,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
     required: '${label} is required!',
   }
 
-  const toastOptions = { hideProgressBar: true }
+  const toastOptions = { hideProgressBar: true, position: 'top-center' } as ToastOptions<{}>
 
   const onFinish = (values: FormDataType) => {
     if (markers.length >= 2) {

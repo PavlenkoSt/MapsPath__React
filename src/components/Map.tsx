@@ -1,6 +1,6 @@
 import React, { Dispatch, FC, SetStateAction } from 'react'
 import { useLoadScript, GoogleMap, DistanceMatrixService, Marker } from '@react-google-maps/api'
-import MarkerType from '../../models/marker'
+import MarkerType from '../models/marker'
 
 type MapPropsType = {
   setMarkers?: Dispatch<SetStateAction<MarkerType[]>>
@@ -64,7 +64,7 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
   const renderMarkers = markers.map(mark => (
     <Marker
       onDragEnd={e => changeMarkerPosition(e.latLng, mark.id)}
-      draggable={true}
+      draggable={isAddRoute}
       key={mark.id}
       position={{ lat: mark.lat, lng: mark.lng }}
     />

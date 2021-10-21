@@ -3,7 +3,7 @@ import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import MarkerType from '../../models/marker'
 import AddNewRouteForm from './AddNewRouteForm/AddNewRouteForm'
 import Diviner from '../Diviner'
-import Map from './Map'
+import Map from '../Map'
 
 type ModalFormPropsType = {
   isModalVisible: boolean

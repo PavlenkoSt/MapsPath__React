@@ -3,7 +3,7 @@ import { Content } from 'antd/lib/layout/layout'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import RouteType from '../../models/route'
 import Diviner from '../Diviner'
-import Map from '../ModalForm/Map'
+import Map from '../Map'
 import RoutesList from './RoutesList'
 
 const Routes = () => {
