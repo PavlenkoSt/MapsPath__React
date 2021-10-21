@@ -1,18 +1,18 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { useLoadScript, GoogleMap, DistanceMatrixService, Marker } from '@react-google-maps/api'
-import MarkerType from '../models/marker'
+import MarkerType from '../../models/marker'
 
 type MapPropsType = {
   setMarkers: Dispatch<SetStateAction<MarkerType[]>>
+  setLength: Dispatch<SetStateAction<string>>
+  markers: MarkerType[]
 }
 
-const Map: FC<MapPropsType> = ({setMarkers}) => {
+const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength }) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY as string,
     libraries: ['places'],
   })
-
-  const [mockMark, serMockMark] = useState([{ lat: 1.296788, lng: 103.778961 }])
 
   if (loadError) return <div>Error</div>
   if (!isLoaded) return <div>loading...</div>
@@ -37,30 +37,35 @@ const Map: FC<MapPropsType> = ({setMarkers}) => {
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),
     }
-    serMockMark([...mockMark, newMark])
+    setMarkers([...markers, newMark])
   }
 
-  const renderMarkers = mockMark.map(mark => <Marker key={mark.lat} position={{ lat: mark.lat, lng: mark.lng }} />)
+  const renderMarkers = markers.map(mark => (
+    <Marker draggable={true} key={mark.lat} position={{ lat: mark.lat, lng: mark.lng }} />
+  ))
 
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={8}
-      center={mockMark[mockMark.length - 1] || center}
+      center={markers[markers.length - 1] || center}
       onClick={clickMap}
       options={options}
     >
       {renderMarkers}
-      {mockMark.length >= 2 && (
+      {markers.length >= 2 && (
         <DistanceMatrixService
           options={{
-            destinations: [mockMark[0]],
-            origins: [...mockMark.filter((mark, idx) => idx !== 0)],
+            destinations: [markers[0]],
+            origins: [...markers.filter((mark, idx) => idx !== 0)],
             //@ts-ignore
             travelMode: 'WALKING',
           }}
           callback={response => {
-            console.log(response)
+            const length = response?.rows[response?.rows.length - 1].elements[0].distance.text
+            if (length) {
+              setLength(length)
+            }
           }}
         />
       )}

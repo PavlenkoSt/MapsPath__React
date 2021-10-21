@@ -4,6 +4,8 @@ import { Layout } from 'antd'
 import Routes from './components/Routes/Routes'
 import Diviner from './components/Diviner'
 import ModalForm from './components/ModalForm/ModalForm'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const { Header, Content } = Layout
 
@@ -20,6 +22,7 @@ const App = () => {
         <Diviner />
       </Content>
       <ModalForm isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
+      <ToastContainer />
     </Layout>
   )
 }
