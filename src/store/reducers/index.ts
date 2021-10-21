@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux'
+import routesReducer from './routes'
 
-const rootReducer = combineReducers({})
+const rootReducer = combineReducers({
+  routesReducer,
+})
 
 export type rootReducerType = ReturnType<typeof rootReducer>
 

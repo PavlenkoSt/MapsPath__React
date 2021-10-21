@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useState } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { useLoadScript, GoogleMap, DistanceMatrixService, Marker } from '@react-google-maps/api'
 import MarkerType from '../../models/marker'
 
