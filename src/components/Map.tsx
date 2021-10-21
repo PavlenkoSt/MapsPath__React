@@ -1,6 +1,5 @@
 import React from 'react'
-import { useLoadScript, GoogleMap } from '@react-google-maps/api'
-import { getRoutes } from '../actions/routes'
+import { useLoadScript, GoogleMap, DistanceMatrixService } from '@react-google-maps/api'
 
 const Map = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -27,12 +26,23 @@ const Map = () => {
   }
 
   const clickMap = (e: any) => {
-    getRoutes()
     console.log(e)
   }
 
   return (
-    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} onClick={clickMap} options={options} />
+    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} onClick={clickMap} options={options}>
+      <DistanceMatrixService
+        options={{
+          destinations: [{ lat: 1.296788, lng: 103.778961 }],
+          origins: [{ lng: 103.780267, lat: 1.291692 }],
+          //@ts-ignore
+          travelMode: 'WALKING',
+        }}
+        callback={response => {
+          console.log(response)
+        }}
+      />
+    </GoogleMap>
   )
 }
 
