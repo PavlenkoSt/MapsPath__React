@@ -1,6 +1,6 @@
 import Search from 'antd/lib/input/Search'
 import React, { useEffect, useState } from 'react'
-import { FullscreenOutlined, RightOutlined, StarOutlined } from '@ant-design/icons'
+import { FullscreenOutlined, LoadingOutlined, RightOutlined, StarOutlined } from '@ant-design/icons'
 import s from './Routes.module.scss'
 import { Col, List } from 'antd'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
@@ -11,7 +11,7 @@ import formatLength from '../../utilts/formatLength'
 const RoutesList = () => {
   const [searchedRoutes, setSearchedRoutes] = useState([] as IRouteWithId[])
 
-  const { routes, activeRouteId } = useTypedSelector(state => state.routesReducer)
+  const { routes, activeRouteId, isLoading } = useTypedSelector(state => state.routesReducer)
 
   const { setActiveRouteId } = useAction()
 
@@ -29,6 +29,10 @@ const RoutesList = () => {
   }
 
   const activateHandler = (id: string) => setActiveRouteId(id)
+
+  if (isLoading) {
+    return <LoadingOutlined />
+  }
 
   return (
     <Col className={s.routes}>

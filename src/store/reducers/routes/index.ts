@@ -2,69 +2,9 @@ import { IRouteWithId } from '../../../models/route'
 import { RoutesActionTypes, RoutesStateType, WeatherActionCreatorsType } from './types'
 
 const initialState: RoutesStateType = {
-  routes: [
-    {
-      id: '16348124712',
-      title: 'test 1',
-      shortDesc: 'test 1 test 1',
-      fullDesc: 'test 1test 1test 1',
-      favourite: false,
-      length: 766662,
-      markers: [
-        {
-          lat: 49.907923534382,
-          lng: 32.124457568,
-          id: 3634817101368,
-        },
-        {
-          lat: 43.90795353597782,
-          lng: 22.1261842457568,
-          id: 2634817101368,
-        },
-      ],
-    },
-    {
-      id: '16348404712',
-      title: 'test 2',
-      shortDesc: 'test 2 test 2',
-      fullDesc: 'test 2test 2test 2',
-      favourite: false,
-      length: 76666,
-      markers: [
-        {
-          lat: 43.9023353597782,
-          lng: 36.12432457568,
-          id: 14,
-        },
-        {
-          lat: 42.907925397782,
-          lng: 24.126184327568,
-          id: 263481714368,
-        },
-      ],
-    },
-    {
-      id: '1634813712',
-      title: 'title',
-      shortDesc: 'desc',
-      fullDesc: 'description',
-      favourite: false,
-      length: 766663,
-      markers: [
-        {
-          lat: 29.907923582,
-          lng: 52.2618492457568,
-          id: 1634837101368,
-        },
-        {
-          lat: 13.9079237782,
-          lng: 12.12618357568,
-          id: 2644817101368,
-        },
-      ],
-    },
-  ] as IRouteWithId[],
+  routes: [] as IRouteWithId[],
   activeRouteId: null,
+  isLoading: false,
 }
 
 const routesReducer = (state = initialState, action: WeatherActionCreatorsType) => {
@@ -75,6 +15,8 @@ const routesReducer = (state = initialState, action: WeatherActionCreatorsType) 
       return { ...state, routes: [...state.routes, action.payload] }
     case RoutesActionTypes.SET_ACTIVE_ROUTE_ID:
       return { ...state, activeRouteId: action.payload }
+    case RoutesActionTypes.CHANGE_IS_LOADING_STATUS:
+      return { ...state, isLoading: action.payload }
     case RoutesActionTypes.REMOVE_ROUTE:
       return {
         ...state,

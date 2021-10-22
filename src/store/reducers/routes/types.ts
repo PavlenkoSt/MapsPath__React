@@ -3,6 +3,7 @@ import { IRouteWithId } from '../../../models/route'
 export type RoutesStateType = {
   routes: IRouteWithId[]
   activeRouteId: string | null
+  isLoading: boolean
 }
 
 export enum RoutesActionTypes {
@@ -11,6 +12,7 @@ export enum RoutesActionTypes {
   REMOVE_ROUTE = 'REMOVE_ROUTE',
   SET_ACTIVE_ROUTE_ID = 'SET_ACTIVE_ROUTE_ID',
   CHANGE_FAVOURITE_STATUS = 'CHANGE_FAVOURITE_STATUS',
+  CHANGE_IS_LOADING_STATUS = 'CHANGE_IS_LOADING_STATUS',
 }
 
 type AddRouteType = {
@@ -38,9 +40,15 @@ type SetRoutes = {
   payload: IRouteWithId[]
 }
 
+type ChangeIsLoading = {
+  type: RoutesActionTypes.CHANGE_IS_LOADING_STATUS
+  payload: boolean
+}
+
 export type WeatherActionCreatorsType =
   | AddRouteType
   | SetActiveRouteId
   | ChangeFavouriteStatus
   | RemoveRoute
   | SetRoutes
+  | ChangeIsLoading

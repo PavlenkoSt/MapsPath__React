@@ -4,7 +4,6 @@ import MarkerType from '../../../models/marker'
 import { toast, ToastOptions } from 'react-toastify'
 import useAction from '../../../hooks/useAction'
 import formatLength from '../../../utilts/formatLength'
-import routesAPI from '../../../actions/routes'
 
 type AddNewRouteFormPropsType = {
   markers: MarkerType[]

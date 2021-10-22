@@ -5,15 +5,17 @@ import 'react-toastify/dist/ReactToastify.css'
 import HeaderContent from './components/Header/HeaderContent'
 import ModalForm from './components/ModalForm/ModalForm'
 import Routes from './components/Routes/Routes'
-import routesAPI from './actions/routes'
+import useAction from './hooks/useAction'
 
 const { Header } = Layout
 
 const App = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
+  const { setRoutesThunk } = useAction()
+
   useEffect(() => {
-    routesAPI.getRoutes()
+    setRoutesThunk()
   }, [])
 
   return (

@@ -1,3 +1,4 @@
+import { IRouteWithId } from './../models/route'
 import { db } from '../firebase'
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
 import { IRoute } from '../models/route'
@@ -7,8 +8,7 @@ const routesRef = collection(db, 'routes')
 const routesAPI = {
   async getRoutes() {
     const data = await getDocs(routesRef)
-    const routesList = data.docs.map(doc => ({ ...doc.data(), id: doc.id }))
-    console.log(routesList)
+    const routesList = data.docs.map(doc => ({ ...doc.data(), id: doc.id })) as unknown as IRouteWithId[]
     return routesList
   },
   async addRoute(route: IRoute) {
