@@ -1,10 +1,10 @@
-import MarkerType from './marker'
+import IMarker from './marker'
 
 export interface IRoute{
   title: string
   shortDesc: string
   fullDesc: string
-  markers: MarkerType[]
+  markers: IMarker[]
   length: number
   favourite: boolean
 }

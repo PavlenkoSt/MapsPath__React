@@ -1,13 +1,13 @@
 import React, { Dispatch, FC, SetStateAction } from 'react'
 import { useLoadScript, GoogleMap, DistanceMatrixService, Marker, Polyline } from '@react-google-maps/api'
-import MarkerType from '../models/marker'
+import IMarker from '../models/marker'
 import { LoadingOutlined } from '@ant-design/icons'
 
 type MapPropsType = {
-  setMarkers?: Dispatch<SetStateAction<MarkerType[]>>
-  setLength?: Dispatch<SetStateAction<number>>
-  markers: MarkerType[]
+  markers: IMarker[]
   isAddRoute: boolean
+  setMarkers?: Dispatch<SetStateAction<IMarker[]>>
+  setLength?: Dispatch<SetStateAction<number>>
 }
 
 const libraries = ['places'] as Array<'places' | 'drawing' | 'geometry' | 'localContext' | 'visualization'>
@@ -54,11 +54,20 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
           if (mark.id === id) {
             mark.lat = latLng.lat()
             mark.lng = latLng.lng()
-            console.log(mark)
           }
           return mark
         })
       )
+    }
+  }
+
+  const calculateLength = (response: google.maps.DistanceMatrixResponse | null) => {
+    const meters = response?.rows.reduce((acc, cur) => {
+      return (acc += cur?.elements[0]?.distance?.value)
+    }, 0)
+
+    if (meters && setLength) {
+      setLength(meters)
     }
   }
 
@@ -93,18 +102,9 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
           options={{
             destinations: [markers[0]],
             origins: [...markers.filter((mark, idx) => idx !== 0)],
-            //@ts-ignore
-            travelMode: 'WALKING',
+            travelMode: 'WALKING' as google.maps.TravelMode,
           }}
-          callback={response => {
-            const meters = response?.rows.reduce((acc, cur) => {
-              return (acc += cur?.elements[0]?.distance?.value)
-            }, 0)
-
-            if (meters && setLength) {
-              setLength(meters)
-            }
-          }}
+          callback={calculateLength}
         />
       )}
     </GoogleMap>
