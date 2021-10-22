@@ -33,6 +33,7 @@ const routesActionCreators = {
 
       if (id) {
         dispatch(routesActionCreators.addRoute({ ...route, id }))
+        dispatch(routesActionCreators.setActiveRouteId(id))
       }
     } catch (e) {
       console.dir(e)

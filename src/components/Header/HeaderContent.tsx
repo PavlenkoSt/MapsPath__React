@@ -10,7 +10,7 @@ const HeaderContent: FC<HeaderContentPropsType> = ({ setIsModalVisible }) => {
   return (
     <Row justify="space-between" align="middle">
       <Col span={12}>
-        <Row style={{ color: '#fff', rowGap: 10, fontSize: 20 }}>
+        <Row style={{ color: '#fff', columnGap: 10, fontSize: 20 }}>
           <Col>
             <FullscreenOutlined />
           </Col>

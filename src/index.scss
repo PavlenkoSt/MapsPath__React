@@ -23,3 +23,10 @@
   display: flex;
   gap: 20px;
 }
+
+.ant-card{
+  &.ant-card-bordered{
+    height: calc(100vh - 104px);
+    overflow-y: auto;
+  }
+}
