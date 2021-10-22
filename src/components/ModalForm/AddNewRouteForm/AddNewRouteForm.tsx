@@ -1,9 +1,10 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Form, Input, Button, Row, Col } from 'antd'
 import MarkerType from '../../../models/marker'
-import { toast, ToastOptions } from 'react-toastify'
+import { toast } from 'react-toastify'
 import useAction from '../../../hooks/useAction'
 import formatLength from '../../../utilts/formatLength'
+import customToastOptions from '../../../utilts/customToastOptions'
 
 type AddNewRouteFormPropsType = {
   markers: MarkerType[]
@@ -46,8 +47,6 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
     wrapperCol: { span: 16 },
   }
 
-  const toastOptions = { hideProgressBar: true, position: 'top-center' } as ToastOptions<{}>
-
   const onFinish = (values: FormDataType) => {
     if (markers.length >= 2) {
       const route = {
@@ -65,10 +64,10 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
 
       setIsModalVisible(false)
 
-      toast('Success! Route added to list', toastOptions)
+      toast('Success! Route added to list', customToastOptions)
       return
     }
-    toast('Error! You should put 2 or more markers on map', toastOptions)
+    toast('Error! You should put 2 or more markers on map', customToastOptions)
   }
 
   const [detectedLength, setDetectedLength] = useState(0)

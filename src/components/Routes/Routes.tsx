@@ -8,13 +8,15 @@ import RoutesList from './RoutesList'
 import { Button, Card, Row } from 'antd'
 import useAction from '../../hooks/useAction'
 import formatLength from '../../utilts/formatLength'
+import { toast } from 'react-toastify'
+import customToastOptions from '../../utilts/customToastOptions'
 
 const Routes = () => {
   const [activeRoute, setActiveRoute] = useState(null as unknown as IRouteWithId)
 
   const { activeRouteId, routes } = useTypedSelector(state => state.routesReducer)
 
-  const { changeFavouriteStatus, removeRoute } = useAction()
+  const { changeFavouriteStatus, removeRouteThunk } = useAction()
 
   useEffect(() => {
     getActiveRoute()
@@ -25,6 +27,11 @@ const Routes = () => {
     if (searchedRoute) {
       setActiveRoute(searchedRoute)
     }
+  }
+
+  const removeHandler = () => {
+    removeRouteThunk(activeRoute.id)
+    toast('Route removed successfully', customToastOptions)
   }
 
   const favouriteHandler = () => changeFavouriteStatus({ id: activeRoute.id, status: !activeRoute.favourite })
@@ -45,7 +52,7 @@ const Routes = () => {
             <Button type="primary" ghost onClick={favouriteHandler}>
               {activeRoute?.favourite ? 'Remove from favourite' : 'Add to favourites'}
             </Button>
-            <Button type="primary" danger onClick={() => removeRoute(activeRoute.id)}>
+            <Button type="primary" danger onClick={removeHandler}>
               Remove
             </Button>
           </Row>

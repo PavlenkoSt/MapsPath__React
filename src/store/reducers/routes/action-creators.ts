@@ -40,7 +40,8 @@ const routesActionCreators = {
   },
   removeRouteThunk: (id: string) => async (dispatch: AppDispatchType) => {
     try {
-      
+      await routesAPI.deleteRoute(id)
+      dispatch(routesActionCreators.removeRoute(id))
     } catch (e) {
       console.dir(e)
     }
