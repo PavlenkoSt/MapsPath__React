@@ -26,7 +26,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
   setMarkers,
   setLength,
 }) => {
-  const { addRoute } = useAction()
+  const { addRouteThunk } = useAction()
 
   const [form] = Form.useForm()
 
@@ -50,24 +50,16 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
 
   const onFinish = (values: FormDataType) => {
     if (markers.length >= 2) {
-      addRoute({
-        id: '333',
+      const route = {
         title: values.title,
         shortDesc: values.shortDescription,
         fullDesc: values.fullDescription,
         favourite: false,
         length,
         markers,
-      })
+      }
 
-      // routesAPI.addRoute({
-      //   title: values.title,
-      //   shortDesc: values.shortDescription,
-      //   fullDesc: values.fullDescription,
-      //   favourite: false,
-      //   length,
-      //   markers,
-      // })
+      addRouteThunk(route)
 
       reset()
 

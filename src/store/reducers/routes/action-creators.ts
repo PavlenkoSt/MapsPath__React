@@ -1,5 +1,5 @@
 import { AppDispatchType } from './../../index'
-import { IRouteWithId } from '../../../models/route'
+import { IRoute, IRouteWithId } from '../../../models/route'
 import { RoutesActionTypes } from './types'
 import routesAPI from '../../../actions/routes'
 
@@ -25,6 +25,24 @@ const routesActionCreators = {
       console.dir(e)
     } finally {
       dispatch(routesActionCreators.changeIsLoadingStatus(false))
+    }
+  },
+  addRouteThunk: (route: IRoute) => async (dispatch: AppDispatchType) => {
+    try {
+      const id = await routesAPI.addRoute(route)
+
+      if (id) {
+        dispatch(routesActionCreators.addRoute({ ...route, id }))
+      }
+    } catch (e) {
+      console.dir(e)
+    }
+  },
+  removeRouteThunk: (id: string) => async (dispatch: AppDispatchType) => {
+    try {
+      
+    } catch (e) {
+      console.dir(e)
     }
   },
 }
