@@ -64,7 +64,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
 
       setIsModalVisible(false)
 
-      toast('Success! Route added to list', customToastOptions)
+      toast('Route added successfully', customToastOptions)
       return
     }
     toast('Error! You should put 2 or more markers on map', customToastOptions)

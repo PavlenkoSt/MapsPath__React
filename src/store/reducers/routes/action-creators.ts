@@ -46,6 +46,14 @@ const routesActionCreators = {
       console.dir(e)
     }
   },
+  changeFavouriteStatusThunk: (id: string, status: boolean) => async (dispatch: AppDispatchType) => {
+    try {
+      await routesAPI.updateRoute(id, { favourite: status })
+      dispatch(routesActionCreators.changeFavouriteStatus({ id, status }))
+    } catch (e) {
+      console.dir(e)
+    }
+  },
 }
 
 export default routesActionCreators

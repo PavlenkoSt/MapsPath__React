@@ -16,7 +16,7 @@ const Routes = () => {
 
   const { activeRouteId, routes } = useTypedSelector(state => state.routesReducer)
 
-  const { changeFavouriteStatus, removeRouteThunk } = useAction()
+  const { changeFavouriteStatusThunk, removeRouteThunk } = useAction()
 
   useEffect(() => {
     getActiveRoute()
@@ -34,7 +34,10 @@ const Routes = () => {
     toast('Route removed successfully', customToastOptions)
   }
 
-  const favouriteHandler = () => changeFavouriteStatus({ id: activeRoute.id, status: !activeRoute.favourite })
+  const favouriteHandler = () => {
+    changeFavouriteStatusThunk(activeRoute.id, !activeRoute.favourite)
+    toast('Favourite status of route has changed successfully', customToastOptions)
+  }
 
   return (
     <Content className="content">
