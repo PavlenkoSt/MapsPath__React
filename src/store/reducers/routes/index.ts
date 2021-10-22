@@ -18,10 +18,11 @@ const routesReducer = (state = initialState, action: WeatherActionCreatorsType) 
     case RoutesActionTypes.CHANGE_IS_LOADING_STATUS:
       return { ...state, isLoading: action.payload }
     case RoutesActionTypes.REMOVE_ROUTE:
+      const updatedRouts = state.routes.filter(route => route.id !== action.payload)
       return {
         ...state,
-        routes: state.routes.filter(route => route.id !== action.payload),
-        activeRouteId: state.activeRouteId === action.payload ? null : state.activeRouteId,
+        routes: updatedRouts,
+        activeRouteId: state.activeRouteId === action.payload ? updatedRouts[0]?.id || null : state.activeRouteId,
       }
     case RoutesActionTypes.CHANGE_FAVOURITE_STATUS:
       return {
