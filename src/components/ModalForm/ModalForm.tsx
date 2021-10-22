@@ -2,7 +2,6 @@ import { Modal } from 'antd'
 import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import MarkerType from '../../models/marker'
 import AddNewRouteForm from './AddNewRouteForm/AddNewRouteForm'
-import Diviner from '../Diviner'
 import Map from '../Map'
 
 type ModalFormPropsType = {
@@ -30,7 +29,6 @@ const ModalForm: FC<ModalFormPropsType> = ({ isModalVisible, setIsModalVisible }
         setMarkers={setMarkers}
         setLength={setLength}
       />
-      <Diviner />
       <Map setMarkers={setMarkers} markers={markers} setLength={setLength} isAddRoute={true} />
     </Modal>
   )

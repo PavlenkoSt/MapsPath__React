@@ -20,6 +20,10 @@ const routesActionCreators = {
 
       if (routes && routes.length) {
         dispatch(routesActionCreators.setRoutes(routes))
+        const firstTarget: IRouteWithId = routes.find(route => route.favourite) || routes[0]
+        if (firstTarget) {
+          dispatch(routesActionCreators.setActiveRouteId(firstTarget.id))
+        }
       }
     } catch (e) {
       console.dir(e)
