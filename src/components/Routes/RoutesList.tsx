@@ -42,7 +42,7 @@ const RoutesList = () => {
               description={route.shortDesc}
             />
             <Col className={s.distance}>{formatLength(route.length)}</Col>
-            <RightOutlined style={{ color: '#333' }} />
+            <RightOutlined className={s.arr} />
           </List.Item>
         )}
       />
