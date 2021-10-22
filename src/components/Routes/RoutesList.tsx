@@ -30,9 +30,7 @@ const RoutesList = () => {
 
   const activateHandler = (id: string) => setActiveRouteId(id)
 
-  if (isLoading) {
-    return <LoadingOutlined />
-  }
+  if (isLoading) return <LoadingOutlined />
 
   return (
     <Col className={s.routes}>
