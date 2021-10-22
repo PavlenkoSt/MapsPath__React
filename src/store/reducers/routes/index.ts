@@ -24,15 +24,14 @@ const routesReducer = (state = initialState, action: WeatherActionCreatorsType) 
         activeRouteId: state.activeRouteId === action.payload ? null : state.activeRouteId,
       }
     case RoutesActionTypes.CHANGE_FAVOURITE_STATUS:
-      const updatedRoutes = state.routes.map(route => {
-        if (route.id === action.payload.id) {
-          route.favourite = action.payload.status
-        }
-        return route
-      })
       return {
         ...state,
-        routes: updatedRoutes.sort((a, b) => +b.favourite - +a.favourite),
+        routes: state.routes.map(route => {
+          if (route.id === action.payload.id) {
+            route.favourite = action.payload.status
+          }
+          return route
+        }),
       }
     default:
       return state
