@@ -5,7 +5,6 @@ import HeaderContent from './components/Header/HeaderContent'
 import ModalForm from './components/ModalForm/ModalForm'
 import Routes from './components/Routes/Routes'
 import useAction from './hooks/useAction'
-import 'react-toastify/dist/ReactToastify.css'
 
 const { Header } = Layout
 
