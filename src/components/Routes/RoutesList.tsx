@@ -1,5 +1,5 @@
-import Search from 'antd/lib/input/Search'
 import React from 'react'
+import Search from 'antd/lib/input/Search'
 import { FullscreenOutlined, LoadingOutlined, RightOutlined, StarOutlined } from '@ant-design/icons'
 import s from './Routes.module.scss'
 import { Col, List } from 'antd'
@@ -7,14 +7,14 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { IRouteWithId } from '../../models/route'
 import useAction from '../../hooks/useAction'
 import formatLength from '../../utilts/formatLength'
-import useSearch from '../../hooks/useSearch'
+import useSearchAndSort from '../../hooks/useSortAndSearch'
 
 const RoutesList = () => {
   const { routes, activeRouteId, isLoading } = useTypedSelector(state => state.routesReducer)
 
   const { setActiveRouteId } = useAction()
 
-  const { setSearchVal, searchedRoutes } = useSearch(routes)
+  const { setSearchVal, sortedAndSerchedRoutes } = useSearchAndSort(routes)
 
   const activateHandler = (id: string) => setActiveRouteId(id)
 
@@ -24,7 +24,7 @@ const RoutesList = () => {
     <Col className={s.routes}>
       <Search onChange={e => setSearchVal(e.target.value)} className={s.input} />
       <List
-        dataSource={searchedRoutes}
+        dataSource={sortedAndSerchedRoutes}
         className={s.list}
         renderItem={(route: IRouteWithId) => (
           <List.Item
