@@ -4,6 +4,7 @@ import MarkerType from '../../../models/marker'
 import { toast, ToastOptions } from 'react-toastify'
 import useAction from '../../../hooks/useAction'
 import formatLength from '../../../utilts/formatLength'
+import routesAPI from '../../../actions/routes'
 
 type AddNewRouteFormPropsType = {
   markers: MarkerType[]
@@ -51,7 +52,7 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
   const onFinish = (values: FormDataType) => {
     if (markers.length >= 2) {
       addRoute({
-        id: Date.now(),
+        id: '333',
         title: values.title,
         shortDesc: values.shortDescription,
         fullDesc: values.fullDescription,
@@ -59,6 +60,15 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
         length,
         markers,
       })
+
+      // routesAPI.addRoute({
+      //   title: values.title,
+      //   shortDesc: values.shortDescription,
+      //   fullDesc: values.fullDescription,
+      //   favourite: false,
+      //   length,
+      //   markers,
+      // })
 
       reset()
 

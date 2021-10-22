@@ -1,10 +1,10 @@
-import RouteType from '../../../models/route'
+import { IRouteWithId } from '../../../models/route'
 import { RoutesActionTypes, RoutesStateType, WeatherActionCreatorsType } from './types'
 
 const initialState: RoutesStateType = {
   routes: [
     {
-      id: 16348124712,
+      id: '16348124712',
       title: 'test 1',
       shortDesc: 'test 1 test 1',
       fullDesc: 'test 1test 1test 1',
@@ -24,7 +24,7 @@ const initialState: RoutesStateType = {
       ],
     },
     {
-      id: 16348404712,
+      id: '16348404712',
       title: 'test 2',
       shortDesc: 'test 2 test 2',
       fullDesc: 'test 2test 2test 2',
@@ -44,7 +44,7 @@ const initialState: RoutesStateType = {
       ],
     },
     {
-      id: 1634813712,
+      id: '1634813712',
       title: 'title',
       shortDesc: 'desc',
       fullDesc: 'description',
@@ -63,7 +63,7 @@ const initialState: RoutesStateType = {
         },
       ],
     },
-  ] as RouteType[],
+  ] as IRouteWithId[],
   activeRouteId: null,
 }
 

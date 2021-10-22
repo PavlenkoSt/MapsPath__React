@@ -1,6 +1,6 @@
 import { db } from '../firebase'
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
-import RouteType from '../models/route'
+import { IRoute } from '../models/route'
 
 const routesRef = collection(db, 'routes')
 
@@ -11,8 +11,9 @@ const routesAPI = {
     console.log(routesList)
     return routesList
   },
-  async addRoute(route: RouteType) {
-    await addDoc(routesRef, { ...route })
+  async addRoute(route: IRoute) {
+    const res = await addDoc(routesRef, { ...route })
+    return res.id
   },
   async updateRoute(id: string, newFields: any) {
     const routeDoc = doc(db, 'routes', id)

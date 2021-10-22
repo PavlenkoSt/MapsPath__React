@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Content } from 'antd/lib/layout/layout'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
-import RouteType from '../../models/route'
+import { IRouteWithId } from '../../models/route'
 import Diviner from '../Diviner'
 import Map from '../Map'
 import RoutesList from './RoutesList'
@@ -10,7 +10,7 @@ import useAction from '../../hooks/useAction'
 import formatLength from '../../utilts/formatLength'
 
 const Routes = () => {
-  const [activeRoute, setActiveRoute] = useState(null as unknown as RouteType)
+  const [activeRoute, setActiveRoute] = useState(null as unknown as IRouteWithId)
 
   const { activeRouteId, routes } = useTypedSelector(state => state.routesReducer)
 
@@ -21,7 +21,7 @@ const Routes = () => {
   }, [activeRouteId])
 
   const getActiveRoute = () => {
-    const searchedRoute = routes.find((route: RouteType) => route.id === activeRouteId)
+    const searchedRoute = routes.find((route: IRouteWithId) => route.id === activeRouteId)
     if (searchedRoute) {
       setActiveRoute(searchedRoute)
     }

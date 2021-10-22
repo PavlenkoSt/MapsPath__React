@@ -4,12 +4,12 @@ import { FullscreenOutlined, RightOutlined, StarOutlined } from '@ant-design/ico
 import s from './Routes.module.scss'
 import { Col, List } from 'antd'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
-import RouteType from '../../models/route'
+import { IRouteWithId } from '../../models/route'
 import useAction from '../../hooks/useAction'
 import formatLength from '../../utilts/formatLength'
 
 const RoutesList = () => {
-  const [searchedRoutes, setSearchedRoutes] = useState([] as RouteType[])
+  const [searchedRoutes, setSearchedRoutes] = useState([] as IRouteWithId[])
 
   const { routes, activeRouteId } = useTypedSelector(state => state.routesReducer)
 
@@ -20,7 +20,7 @@ const RoutesList = () => {
   const searchedFilter = (value: string) => {
     if (value) {
       const search = routes.filter(
-        (route: RouteType) => route.title.indexOf(value) >= 0 || route.fullDesc.indexOf(value) >= 0
+        (route: IRouteWithId) => route.title.indexOf(value) >= 0 || route.fullDesc.indexOf(value) >= 0
       )
       setSearchedRoutes(search)
       return
@@ -28,7 +28,7 @@ const RoutesList = () => {
     setSearchedRoutes(routes)
   }
 
-  const activateHandler = (id: number) => setActiveRouteId(id)
+  const activateHandler = (id: string) => setActiveRouteId(id)
 
   return (
     <Col className={s.routes}>
@@ -36,7 +36,7 @@ const RoutesList = () => {
       <List
         dataSource={searchedRoutes}
         className={s.list}
-        renderItem={(route: RouteType) => (
+        renderItem={(route: IRouteWithId) => (
           <List.Item
             key={route.id}
             className={activeRouteId === route.id ? `${s.route} ${s.active}` : s.route}

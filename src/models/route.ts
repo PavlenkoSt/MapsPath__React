@@ -1,7 +1,6 @@
 import MarkerType from './marker'
 
-type RouteType = {
-  id: number
+export interface IRoute{
   title: string
   shortDesc: string
   fullDesc: string
@@ -10,4 +9,6 @@ type RouteType = {
   favourite: boolean
 }
 
-export default RouteType
+export interface IRouteWithId extends IRoute {
+  id: string
+}

@@ -1,8 +1,8 @@
-import RouteType from '../../../models/route'
+import { IRouteWithId } from '../../../models/route'
 
 export type RoutesStateType = {
-  routes: RouteType[]
-  activeRouteId: number | null
+  routes: IRouteWithId[]
+  activeRouteId: string | null
 }
 
 export enum RoutesActionTypes {
@@ -15,27 +15,27 @@ export enum RoutesActionTypes {
 
 type AddRouteType = {
   type: RoutesActionTypes.ADD_ROUTE
-  payload: RouteType
+  payload: IRouteWithId
 }
 
 type SetActiveRouteId = {
   type: RoutesActionTypes.SET_ACTIVE_ROUTE_ID
-  payload: number
+  payload: string
 }
 
 type ChangeFavouriteStatus = {
   type: RoutesActionTypes.CHANGE_FAVOURITE_STATUS
-  payload: { id: number; status: boolean }
+  payload: { id: string; status: boolean }
 }
 
 type RemoveRoute = {
   type: RoutesActionTypes.REMOVE_ROUTE
-  payload: number
+  payload: string
 }
 
 type SetRoutes = {
   type: RoutesActionTypes.SET_ROUTES
-  payload: RouteType[]
+  payload: IRouteWithId[]
 }
 
 export type WeatherActionCreatorsType =
