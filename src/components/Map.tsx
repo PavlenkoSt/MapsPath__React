@@ -23,7 +23,7 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
   if (!isLoaded) return <LoadingOutlined />
 
   const mapContainerStyle = {
-    width: isAddRoute ? 400 : '100%',
+    width: '100%',
     height: isAddRoute ? 480 : 400,
   }
 
@@ -84,7 +84,7 @@ const Map: FC<MapPropsType> = ({ setMarkers, markers, setLength, isAddRoute }) =
 
   return (
     <Col className="map-container">
-      <div className="map-line">Click to map and put markers:</div>
+      {isAddRoute && <div className="map-line">Click to map and put markers:</div>}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}

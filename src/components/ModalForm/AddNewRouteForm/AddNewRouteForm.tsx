@@ -73,25 +73,21 @@ const AddNewRouteForm: FC<AddNewRouteFormPropsType> = ({
   const [detectedLength, setDetectedLength] = useState(0)
 
   return (
-    <Form {...layout} form={form} onFinish={onFinish} validateMessages={validateMessages} style={{ width: '50%' }}>
+    <Form {...layout} form={form} onFinish={onFinish} validateMessages={validateMessages} style={{ width: '100%' }}>
       <Form.Item name={['title']} label="Title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['shortDescription']} label="Short description" rules={[{ required: true, max: 160 }]}>
         <Input.TextArea onChange={e => setDetectedLength(e.target.value.length)} />
       </Form.Item>
-      <Form.Item>
-        <Row justify="end">
-          <Col>Limit {detectedLength} of 160</Col>
-        </Row>
+      <Form.Item className="form-center">
+        <Col>Limit {detectedLength} of 160</Col>
       </Form.Item>
       <Form.Item name={['fullDescription']} label="Full description" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item>
-        <Row justify="end">Length: {formatLength(length) || '0 m'}</Row>
-      </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+      <Form.Item className="form-center">Length: {formatLength(length) || '0 m'}</Form.Item>
+      <Form.Item className="form-center">
         <Button type="primary" htmlType="submit">
           Add path
         </Button>
