@@ -19,6 +19,23 @@
   text-align: center;
 }
 
+.map-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.map-line {
+  background-color: green;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  font-weight: 600;
+  width: 100%;
+}
+
 .modal {
   display: flex;
   gap: 20px;
@@ -57,23 +74,6 @@
 
 .ant-card-body {
   overflow: hidden;
-}
-
-.map-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-}
-
-.map-line {
-  background-color: green;
-  color: #fff;
-  padding: 5px;
-  text-align: center;
-  font-weight: 600;
-  width: 100%;
 }
 
 .ant-layout-header,
