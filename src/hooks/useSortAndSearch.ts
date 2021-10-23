@@ -1,4 +1,4 @@
-import { IRouteWithId } from './../models/route'
+import { IRouteWithId } from 'models/route'
 import useSearch from './useSearch'
 import useSortByFavourite from './useSortByFavourite'
 

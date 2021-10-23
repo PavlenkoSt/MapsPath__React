@@ -1,7 +1,7 @@
-import { IRouteWithId } from './../models/route'
+import { IRouteWithId } from 'models/route'
 import { db } from '../firebase'
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
-import { IRoute } from '../models/route'
+import { IRoute } from 'models/route'
 
 const routesRef = collection(db, 'routes')
 

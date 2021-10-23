@@ -1,7 +1,7 @@
 import { AppDispatchType } from './../../index'
-import { IRoute, IRouteWithId } from '../../../models/route'
+import { IRoute, IRouteWithId } from 'models/route'
 import { RoutesActionTypes } from './types'
-import routesAPI from '../../../actions/routes'
+import routesAPI from 'actions/routes'
 
 const routesActionCreators = {
   setRoutes: (payload: IRouteWithId[]) => ({ type: RoutesActionTypes.SET_ROUTES, payload } as const),

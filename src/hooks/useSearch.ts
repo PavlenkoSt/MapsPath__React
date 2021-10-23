@@ -1,4 +1,4 @@
-import { IRouteWithId } from './../models/route'
+import { IRouteWithId } from 'models/route'
 import { useEffect, useState } from 'react'
 
 const useSearch = (routes: IRouteWithId[]) => {
@@ -8,7 +8,9 @@ const useSearch = (routes: IRouteWithId[]) => {
   useEffect(() => {
     if (searchVal) {
       const search = routes.filter(
-        (route: IRouteWithId) => route.title.indexOf(searchVal) >= 0 || route.fullDesc.indexOf(searchVal) >= 0
+        (route: IRouteWithId) =>
+          route.title.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0 ||
+          route.fullDesc.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0
       )
       setSearchedRoutes(search)
     } else {

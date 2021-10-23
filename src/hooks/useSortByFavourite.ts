@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { IRouteWithId } from './../models/route'
+import { IRouteWithId } from 'models/route'
 
 const useSortByFavourite = (routes: IRouteWithId[]) => {
   const [sortedRoutes, setSortedRoutes] = useState([] as IRouteWithId[])
